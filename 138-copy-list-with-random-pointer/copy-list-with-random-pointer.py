@@ -11,24 +11,24 @@ class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
         if not head:
             return None
-        
+
         curr = head
         while curr:
             new_node = Node(curr.val)
             new_node.next = curr.next
             curr.next = new_node
             curr = new_node.next
-
+        
         curr = head
         while curr:
             if curr.random:
                 curr.next.random = curr.random.next
             curr = curr.next.next
         
-        dummy = Node(0)
-        curr = head
-        copy_curr = dummy
 
+        curr = head
+        dummy = Node(0)
+        copy_curr = dummy
         while curr:
             copy_curr.next = curr.next
             copy_curr = copy_curr.next
@@ -37,3 +37,4 @@ class Solution:
             curr = curr.next
         
         return dummy.next
+        
