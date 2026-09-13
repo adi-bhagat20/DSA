@@ -3,11 +3,13 @@ class Solution:
         if len(s) != len(t):
             return False
         
-        lst1 = sorted(s)
-        lst2 = sorted(t)
+        lst = list(s)
 
-        for i in range(len(lst1)):
-            if lst1[i]!=lst2[i]:
-                return False
-            
+        for ch in t:
+            if ch in lst:
+                lst.remove(ch)
+
+        if len(lst) != 0:
+            return False
+        
         return True
