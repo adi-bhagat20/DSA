@@ -1,4 +1,4 @@
-class ListNode:
+class Node:
     def __init__(self , key):
         self.key = key
         self.next = None
@@ -6,37 +6,38 @@ class ListNode:
 class MyHashSet:
 
     def __init__(self):
-        self.set = [ListNode(0) for i in range(10**4)]
+        self.set = [Node(0) for i in range(10000)]
 
     def add(self, key: int) -> None:
-        index = key%len(self.set)
-        curr = self.set[index]
+        idx = key % len(self.set)
+        cur = self.set[idx]
 
-        while curr.next:
-            if curr.next.key == key:
+        while cur.next:
+            if cur.next.key == key:
                 return
-            curr = curr.next
-        
-        curr.next = ListNode(key)
-    def remove(self, key: int) -> None:
-        index = key%len(self.set)
-        curr = self.set[index]
+            cur = cur.next
+        cur.next = Node(key)
 
-        while curr.next:
-            if curr.next.key == key:
-                curr.next = curr.next.next
-                return 
-            curr = curr.next
+    def remove(self, key: int) -> None:
+        idx = key % len(self.set)
+        cur = self.set[idx]
+
+        while cur.next:
+            if cur.next.key == key:
+                cur.next = cur.next.next
+                return
+            cur = cur.next
 
     def contains(self, key: int) -> bool:
-        index = key%len(self.set)
-        curr = self.set[index]
+        idx = key % len(self.set)
+        cur = self.set[idx]
 
-        while curr.next:
-            if curr.next.key == key:
+        while cur.next:
+            if cur.next.key == key:
                 return True
-            curr = curr.next
+            cur = cur.next
         return False
+
 
 # Your MyHashSet object will be instantiated and called as such:
 # obj = MyHashSet()
