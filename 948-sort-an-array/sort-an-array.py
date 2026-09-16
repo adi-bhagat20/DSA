@@ -1,7 +1,7 @@
 class Solution:
-    def merge(self , left , right):
-        sorted_arr = []
+    def merged(self , left , right):
         i , j = 0 , 0
+        sorted_arr = []
 
         while i < len(left) and j < len(right):
             if left[i] < right[j]:
@@ -10,21 +10,17 @@ class Solution:
             else:
                 sorted_arr.append(right[j])
                 j += 1
-
         sorted_arr.extend(left[i:])
         sorted_arr.extend(right[j:])
 
         return sorted_arr
-
-    def mergeSort(self , nums):
+    def sortArray(self, nums: list[int]) -> list[int]:
         if len(nums) <= 1:
             return nums
         
         mid = len(nums) // 2
-        left_half = self.mergeSort(nums[:mid])
-        right_half = self.mergeSort(nums[mid:])
 
-        return self.merge(left_half , right_half)
+        left_half = self.sortArray(nums[:mid])
+        right_half = self.sortArray(nums[mid:])
 
-    def sortArray(self, nums: list[int]) -> list[int]:
-        return self.mergeSort(nums)
+        return self.merged(left_half , right_half)
