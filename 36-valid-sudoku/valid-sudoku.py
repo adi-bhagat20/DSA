@@ -7,16 +7,17 @@ class Solution:
                 val = board[i][j]
                 
                 if val != ".":
-                    # Unique identifiers for row, column, and 3x3 sub-box
-                    row_id = f"row {i} has {val}"
-                    col_id = f"col {j} has {val}"
-                    box_id = f"box {i // 3}-{j // 3} has {val}"
+                    # Unique identifiers using tuples instead of lists
+                    # Adding a tag like "row", "col", or "box" keeps them distinct
+                    row = ("row", i, val)
+                    col = ("col", j, val)
+                    box = ("box", i // 3, j // 3, val)
                     
                     # If any of these identifiers already exist, it's an invalid Sudoku
-                    if row_id in seen or col_id in seen or box_id in seen:
+                    if row in seen or col in seen or box in seen:
                         return False
                     
                     # Add them to the set
-                    seen.update([row_id, col_id, box_id])
+                    seen.update([row, col, box])
                     
         return True
