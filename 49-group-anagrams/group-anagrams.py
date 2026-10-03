@@ -3,13 +3,12 @@ class Solution:
         d = {}
 
         for word in strs:
-            count = [0]*26
 
-            for ch in word:
-                count[ord(ch) - ord('a')]+=1
+            sorted_word = "".join(sorted(word))
 
-            key = tuple(count)
-
-            d.setdefault(key , []).append(word)
+            if sorted_word not in d:
+                d[sorted_word] = []
+            
+            d[sorted_word].append(word)
 
         return list(d.values())
