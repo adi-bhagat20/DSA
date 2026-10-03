@@ -1,24 +1,23 @@
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
-        ans = [0]*len(nums)
+        countOfZeros = 0
         product = 1
         idx = -1
-        countOf0s = 0
 
         for i in range(len(nums)):
             if nums[i] == 0:
+                countOfZeros += 1
                 idx = i
-                countOf0s += 1
-                if countOf0s > 1:
-                    return ans
                 continue
-            product *= nums[i]
+            product = product*nums[i]
         
-        if countOf0s == 1:
-            ans[idx] = product
-            return ans
+        if countOfZeros > 1:
+            return [0 for _ in range(len(nums))] 
+        elif countOfZeros == 1:
+            nums = [0 for _ in range(len(nums))]
+            nums[idx] = product
+        else:
+            for i in range(len(nums)):
+                nums[i] = product // nums[i]
         
-        for i in range(len(nums)):
-            ans[i] = product // nums[i]
-
-        return ans
+        return nums
